@@ -1,0 +1,19 @@
+.sign-in-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-form-container{
+    width: 350px;
+}
+
+.signin-form-container h2{
+    cursor: pointer;
+}
+
+.signin-with-google:hover{
+    background-color: rgb(53, 53, 53);
+    color: white;
+}

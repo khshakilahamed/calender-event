@@ -1,0 +1,14 @@
+.not-found-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.not-found-container h1{
+    font-size: 100px;
+    color: red;
+}
+.not-found-container p{
+    font-size: 20px;
+}

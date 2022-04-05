@@ -1,0 +1,16 @@
+.home-dashboard{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu{
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* .menu:active{
+    background-color: red;
+} */
