@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
+import swal from 'sweetalert';
 import useAuth from '../../hooks/useAuth';
 
 const AddEvents = () => {
@@ -29,7 +30,11 @@ const AddEvents = () => {
         .then(res => res.json())
         .then(data => {
             if(data.insertedId){
-                alert("Inserted Data");
+                swal({
+                    title: "Success!",
+                    text: "You have added an event!",
+                    icon: "success",
+                  });
             }
         })
     }

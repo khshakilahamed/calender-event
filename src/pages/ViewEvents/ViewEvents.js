@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
+import swal from 'sweetalert';
 import useAuth from '../../hooks/useAuth';
 
 const ViewEvents = () => {
@@ -30,19 +31,46 @@ const ViewEvents = () => {
 
     const handleDeleteEvent = (id) => {
         console.log(id);
-        const confirm = window.confirm("Are you Sure?");
-        if(confirm){
-            fetch(`https://peaceful-coast-21734.herokuapp.com/events/${id}`, {
-                method:"DELETE",
-                headers:{
-                    'content-type':'application/json'
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                setDelete(!Delete)
-            })
-        }
+        // const confirm = window.confirm("Are you Sure?");
+        // if(confirm){
+        //     fetch(`https://peaceful-coast-21734.herokuapp.com/events/${id}`, {
+        //         method:"DELETE",
+        //         headers:{
+        //             'content-type':'application/json'
+        //         }
+        //     })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setDelete(!Delete)
+        //     })
+        // }
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                fetch(`https://peaceful-coast-21734.herokuapp.com/events/${id}`, {
+                    method:"DELETE",
+                    headers:{
+                        'content-type':'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    setDelete(!Delete)
+                })
+              swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your imaginary file is safe!");
+            }
+          });
     }
 
 
