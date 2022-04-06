@@ -27,7 +27,7 @@ const Home = () => {
             <div className='home-dashboard'>
                 <NavLink to="/dashboard" style={{textDecoration:'none'}}>
                     <animated.h2 style={props}>
-                            <p className='border bg-secondary text-white p-2 rounded' >Click to DashBoard</p>
+                            <p className='border bg-dark text-white p-2 rounded' >Click to DashBoard</p>
                     </animated.h2>
                 </NavLink>
             </div>

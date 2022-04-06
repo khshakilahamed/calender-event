@@ -3,10 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('../../images/login-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .signin-form-container{
     width: 350px;
+    background-color: wheat;
 }
 
 .signin-form-container h2{

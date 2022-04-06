@@ -1,24 +1,55 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
+import useAuth from '../../hooks/useAuth';
 
 const AddEvents = () => {
+    const {user} = useAuth();
     const [event, setEvent] = useState('');
     const [date, setDate] = useState(new Date());
 
 
     const handleEvent = e => {
         setEvent(e.target.value);
+    };
+
+    const addData = () =>{
+        const userName = user.displayName;
+        const userEmail = user.email;
+        const eventDate = date.toLocaleDateString();
+        const addEvent = {userName, userEmail, event, eventDate};
+
+        fetch('http://localhost:5000/events', {
+            method:"POST",
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(addEvent)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.insertedId){
+                alert("Inserted Data");
+            }
+        })
+    }
+
+    const handleKeyPress = (e) =>{
+        if(e.key === 'Enter'){
+            addData();
+            e.target.reset();
+        }
     }
 
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(date.toLocaleDateString(), event);
+        addData();
+        e.target.reset();
     }
 
     return (
         <div>
-            <Container>
+            <Container style={{overflowX:'hidden'}}>
                 <h2 className='text-center'>Add an event</h2>
                 <hr />
                 <Row gap={4} className="mt-4">
@@ -33,7 +64,7 @@ const AddEvents = () => {
                                 style={{width:"300px", marginTop:'10px', padding:'3px', borderRadius:'5px', outline:"none"}} 
                                 type="text" name="" id="" placeholder='add event name'
                             />
-                            <button className='btn btn-secondary'>Submit</button>
+                            <button handleKeyPress={handleKeyPress} className='btn btn-secondary'>Submit</button>
                         </form>
                     </Col>
                 </Row>

@@ -40,6 +40,7 @@ const Dashboard = () => {
                     <ViewEvents></ViewEvents>
                 </Route>
             </Switch>
+            
         </div>
     );
 };

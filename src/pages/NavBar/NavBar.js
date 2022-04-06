@@ -1,16 +1,23 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import './NavBar.css';
 
 const NavBar = () => {
+    const {user, logout} = useAuth();
+
+    const handleSignOut = () =>{
+        logout();
+    }
+
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand >
                         <NavLink to="/" style={{ textDecoration: 'none' }}>
-                            <h2 style={{ color: 'white' }}>Calender Event</h2>
+                            <h2 style={{ color: 'white' }}>Calendar Event</h2>
                         </NavLink>
                     </Navbar.Brand>
                     <Navbar.Toggle />
@@ -23,14 +30,26 @@ const NavBar = () => {
                             </Nav.Link>
                         </Nav>
 
-                        <Navbar.Text>
-                            {/* Hello, {user.displayName} */}
-                        </Navbar.Text>
 
-                        {/* <button  className="btn btn-light ms-3">Sign up</button> */}
-                        <NavLink to="/sign-in">
-                            <button className="btn btn-light ms-3">Sign in</button>
-                        </NavLink>
+                        {
+                            user?.email && <Navbar.Text className='d-block d-md-inline-block me-2'>
+                                                Hello, {user.displayName}
+                                            </Navbar.Text>
+                        }
+
+                        
+
+
+                        {
+                            user?.email ? 
+                                <button onClick={handleSignOut}  className="btn btn-light">Sign out</button>
+                                :
+                                <NavLink to="/sign-in">
+                                    <button className="btn btn-light">Sign in</button>
+                                </NavLink>
+                        }
+
+                        
                         
                     </Navbar.Collapse>
                 </Container>

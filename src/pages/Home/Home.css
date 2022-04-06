@@ -1,0 +1,11 @@
+.home-dashboard{
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:url('../../images/home-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
