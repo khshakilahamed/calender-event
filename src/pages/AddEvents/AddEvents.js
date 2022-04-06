@@ -19,7 +19,7 @@ const AddEvents = () => {
         const eventDate = date.toLocaleDateString();
         const addEvent = {userName, userEmail, event, eventDate};
 
-        fetch('http://localhost:5000/events', {
+        fetch('https://peaceful-coast-21734.herokuapp.com/events', {
             method:"POST",
             headers:{
                 'content-type':'application/json'

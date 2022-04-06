@@ -10,20 +10,20 @@ const ViewEvents = () => {
     const [value, onChange] = useState(new Date());
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/events?email=${user.email}`)
+        fetch(`https://peaceful-coast-21734.herokuapp.com/events?email=${user.email}`)
         .then(res => res.json())
         .then(data => setEvents(data))
     }, [Delete]);
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/events?date=${value.toLocaleDateString()}&&email=${user.email}`)
+        fetch(`https://peaceful-coast-21734.herokuapp.com/events?date=${value.toLocaleDateString()}&&email=${user.email}`)
         .then(res => res.json())
         .then(data => setEvents(data))
     }, [value]);
 
 
     const handleAllEvents = () =>{
-        fetch(`http://localhost:5000/events?email=${user.email}`)
+        fetch(`https://peaceful-coast-21734.herokuapp.com/events?email=${user.email}`)
         .then(res => res.json())
         .then(data => setEvents(data))
     }
@@ -32,7 +32,7 @@ const ViewEvents = () => {
         console.log(id);
         const confirm = window.confirm("Are you Sure?");
         if(confirm){
-            fetch(`http://localhost:5000/events/${id}`, {
+            fetch(`https://peaceful-coast-21734.herokuapp.com/events/${id}`, {
                 method:"DELETE",
                 headers:{
                     'content-type':'application/json'
