@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
 import swal from 'sweetalert';
 import useAuth from '../../hooks/useAuth';
@@ -9,6 +9,7 @@ const ViewEvents = () => {
     const [events, setEvents] = useState([]);
     const [Delete, setDelete] = useState(false);
     const [value, onChange] = useState(new Date());
+
 
     useEffect(()=>{
         fetch(`https://peaceful-coast-21734.herokuapp.com/events?email=${user.email}`)
@@ -27,24 +28,15 @@ const ViewEvents = () => {
         fetch(`https://peaceful-coast-21734.herokuapp.com/events?email=${user.email}`)
         .then(res => res.json())
         .then(data => setEvents(data))
+    };
+
+    const handleTodaysEvent = () =>{
+        fetch(`https://peaceful-coast-21734.herokuapp.com/events?date=${new Date().toLocaleDateString()}&&email=${user.email}`)
+        .then(res => res.json())
+        .then(data => setEvents(data))
     }
 
     const handleDeleteEvent = (id) => {
-        console.log(id);
-        // const confirm = window.confirm("Are you Sure?");
-        // if(confirm){
-        //     fetch(`https://peaceful-coast-21734.herokuapp.com/events/${id}`, {
-        //         method:"DELETE",
-        //         headers:{
-        //             'content-type':'application/json'
-        //         }
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setDelete(!Delete)
-        //     })
-        // }
-
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover!",
@@ -80,12 +72,13 @@ const ViewEvents = () => {
                 <h2 className='text-center'>View Events</h2>
                 <hr />
                 <Row gap={4} className="mt-4">
-                    <Col xs md={4} className="pt-4">
+                    <Col xs md={4} className="pt-4 d-none d-md-block">
                         <Calendar  onChange={onChange} value={value} />
                     </Col>
                     
                     <Col xs md={8} className="pt-4">
-                        <button onClick={handleAllEvents} className='btn btn-secondary mb-2'>Click to all events</button>
+                        <button onClick={handleAllEvents} className='btn btn-secondary mb-2'>view all events</button>
+                        <button onClick={handleTodaysEvent} className='btn btn-secondary mb-2 ms-2'>view today's event</button>
 
                         <div >
                             <Table striped bordered hover  style={{width:'100%', }}>
